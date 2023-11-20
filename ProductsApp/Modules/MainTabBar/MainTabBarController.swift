@@ -24,19 +24,19 @@ class MainTabBarController: UITabBarController {
     }
 
     private func setupTabBar() {
-        let mainViewController = ViewController()
+        let mainViewController = MainModuleConfigurator.build()
         mainViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "main")?.withRenderingMode(.alwaysOriginal).resize(to: CGSize(width: SizeConstants.taBarIconWidth, height: SizeConstants.tabBarIconHeight)), selectedImage: UIImage(named: "selectedMain")?.withRenderingMode(.alwaysOriginal).resize(to: CGSize(width: SizeConstants.taBarIconWidth, height: SizeConstants.tabBarIconHeight)))
         mainViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
         
-        let cartViewController =  ViewController()
+        let cartViewController =  CartConfigurator.build()
         cartViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "cart")?.withRenderingMode(.alwaysOriginal).resize(to: CGSize(width: SizeConstants.taBarIconWidth, height: SizeConstants.tabBarIconHeight)), selectedImage:UIImage(named: "selectedCart")?.withRenderingMode(.alwaysOriginal).resize(to: CGSize(width: SizeConstants.taBarIconWidth, height: SizeConstants.tabBarIconHeight)))
         cartViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
 
-        let favoritesViewController =  ViewController()
+        let favoritesViewController =  FavoriteConfigurator.build()
         favoritesViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "favorites")?.withRenderingMode(.alwaysOriginal).resize(to: CGSize(width: SizeConstants.taBarIconWidth, height: SizeConstants.tabBarIconHeight)), selectedImage: UIImage(named: "selectedFavorites")?.withRenderingMode(.alwaysOriginal).resize(to: CGSize(width: SizeConstants.taBarIconWidth, height: SizeConstants.tabBarIconHeight)))
         favoritesViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
         
-        let profileViewController =  ViewController()
+        let profileViewController =  ProfileConfigurator.build()
         profileViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "profile")?.withRenderingMode(.alwaysOriginal).resize(to: CGSize(width: SizeConstants.taBarIconWidth, height: SizeConstants.tabBarIconHeight)), selectedImage: UIImage(named: "selectedProfile")?.withRenderingMode(.alwaysOriginal).resize(to: CGSize(width: SizeConstants.taBarIconWidth, height: SizeConstants.tabBarIconHeight)))
         profileViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
         
