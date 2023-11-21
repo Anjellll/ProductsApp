@@ -13,7 +13,7 @@ class CategoryCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     private lazy var categoryImage: UIImageView! = {
         var productImage = UIImageView()
         productImage.contentMode = .scaleAspectFill
-        productImage.layer.cornerRadius = 16
+        productImage.layer.cornerRadius = 80 / 4
         productImage.clipsToBounds = true
         productImage.layer.shadowOffset = .init(width: 15, height: 10)
         productImage.layer.shadowOpacity = 0.4
@@ -63,7 +63,7 @@ extension CategoryCollectionViewCell {
             maker.top.equalTo(categoryImage.snp.bottom).offset(10)
             maker.left.equalToSuperview().offset(10)
             maker.right.equalToSuperview().offset(-10)
-            maker.height.equalTo(13)
+            maker.height.equalTo(15)
             maker.width.equalTo(60)
             maker.centerX.equalTo(categoryImage.snp.centerX)
         }
@@ -79,5 +79,7 @@ extension CategoryCollectionViewCell {
             // Если имя изображения отсутствует, устанавливаем заглушку или другое значение по умолчанию
             categoryImage.image = UIImage(named: "placeholderImage")
         }
+        
+        categoryImage.image = UIImage(named: product.categoryImage ?? "placeholderImage")
     }
 }
