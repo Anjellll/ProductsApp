@@ -15,10 +15,7 @@ class ProductCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
         var productImage = UIImageView()
         productImage.contentMode = .scaleAspectFill
         productImage.clipsToBounds = true
-        productImage.layer.shadowOffset = .init(width: 15, height: 10)
-        productImage.layer.shadowOpacity = 0.4
         productImage.layer.shadowColor = UIColor.gray.cgColor
-        productImage.layer.cornerRadius = 194 / 18
         return productImage
     }()
     
@@ -26,6 +23,7 @@ class ProductCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
         var label = UILabel()
         label.textColor = .black
         label.numberOfLines = 0
+        label.lineBreakMode = .byClipping
         label.textAlignment = .left
         label.font = .systemFont(ofSize: 20, weight: .light)
         return label
@@ -71,7 +69,7 @@ class ProductCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
         label.numberOfLines = 0
         label.textAlignment = .center
         label.textColor =  .white
-        label.backgroundColor = .red
+        label.backgroundColor = .systemPink
         label.font = .systemFont(ofSize: 14, weight: .regular)
         return label
     }()
@@ -130,38 +128,37 @@ extension ProductCollectionViewCell {
         }
         
         likeButton.snp.makeConstraints { maker in
-            maker.top.equalToSuperview().offset(15)
-            maker.height.width.equalTo(24)
-            maker.right.equalToSuperview().offset(-18)
+            maker.top.equalToSuperview().offset(13)
+            maker.height.width.equalTo(26)
+            maker.right.equalToSuperview().offset(-20)
         }
         
-        productLabel.snp.makeConstraints{ maker in
+        productLabel.snp.makeConstraints { maker in
             maker.top.equalTo(productImage.snp.bottom).offset(10)
-            maker.left.equalToSuperview().offset(10)
-            maker.right.equalToSuperview().offset(-280)
+            maker.left.equalToSuperview().offset(15)
             maker.height.equalTo(31)
-            maker.width.equalTo(130)
+            maker.width.equalTo(150)
         }
-         
+
         productPrice.snp.makeConstraints { maker in
             maker.top.equalTo(productImage.snp.bottom).offset(10)
-            maker.left.equalToSuperview().inset(115)
+            maker.left.equalTo(productLabel.snp.right).offset(20)
             maker.height.equalTo(31)
             maker.width.equalTo(80)
-            maker.centerX.equalTo(productLabel.snp.centerX)
         }
+
         
         productRaitingImage.snp.makeConstraints { maker in
             maker.top.equalTo(productLabel.snp.bottom).offset(8)
             maker.left.equalToSuperview().inset(10)
-            maker.height.width.equalTo(15)
+            maker.height.width.equalTo(18)
         }
 
         productRaiting.snp.makeConstraints { maker in
             maker.top.equalTo(productLabel.snp.bottom).offset(8)
             maker.left.equalToSuperview().inset(32)
             maker.height.equalTo(20)
-            maker.width.equalTo(60)
+            maker.width.equalTo(70)
             maker.centerY.equalTo(productRaitingImage.snp.centerY)
         }
 
@@ -169,7 +166,7 @@ extension ProductCollectionViewCell {
             maker.top.equalTo(productLabel.snp.bottom).offset(8)
             maker.left.equalTo(productRaiting.snp.right).offset(14)
             maker.height.equalTo(20)
-            maker.width.equalTo(60)
+            maker.width.equalTo(150)
             maker.centerY.equalTo(productRaitingImage.snp.centerY)
         }
 
@@ -184,7 +181,7 @@ extension ProductCollectionViewCell {
     func displayInfo(product: Product) {
         productLabel.text = product.title
         if let price = product.price {
-            productPrice.text = String("•  \(price)$")
+            productPrice.text = String("\(price)$")
         } else {
             productPrice.text = "N/A"
         }

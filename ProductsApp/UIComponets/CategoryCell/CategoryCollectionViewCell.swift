@@ -15,12 +15,14 @@ class CategoryCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
         productImage.contentMode = .scaleAspectFill
         productImage.layer.cornerRadius = 80 / 2
         productImage.clipsToBounds = true
+        productImage.layer.borderWidth = 0.7
+        productImage.layer.borderColor = UIColor.gray.cgColor
         productImage.layer.shadowOffset = .init(width: 15, height: 10)
         productImage.layer.shadowOpacity = 0.4
         productImage.layer.shadowColor = UIColor.gray.cgColor
         return productImage
     }()
-    
+
     private lazy var categoryLabel: UILabel = {
         var label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .light)
@@ -52,34 +54,28 @@ extension CategoryCollectionViewCell {
     }
     
     private func setupConstraints() {
-        categoryImage.snp.makeConstraints{ maker in
+        categoryImage.snp.makeConstraints { maker in
             maker.top.equalToSuperview().offset(10)
             maker.left.equalToSuperview().offset(5)
             maker.right.equalToSuperview().offset(-5)
             maker.height.width.equalTo(80)
         }
-        
-        categoryLabel.snp.makeConstraints{ maker in
+
+        categoryLabel.snp.makeConstraints { maker in
             maker.top.equalTo(categoryImage.snp.bottom).offset(10)
-            maker.left.equalToSuperview().offset(10)
-            maker.right.equalToSuperview().offset(-10)
-            maker.height.equalTo(15)
-            maker.width.equalTo(60)
             maker.centerX.equalTo(categoryImage.snp.centerX)
+            maker.height.greaterThanOrEqualTo(15)
         }
     }
+
     
     func displayInfo(product: ProductsCategoryModels) {
         categoryLabel.text = product.categoryName
-        // Проверяем, что у нас есть имя изображения
+        
         if let imageName = product.categoryImage {
-            // Устанавливаем изображение с использованием имени ресурса
             categoryImage.image = UIImage(named: imageName)
         } else {
-            // Если URL изображения отсутствует, установите запасное изображение
             categoryImage.image = UIImage(named: "placeholderImage")
         }
     }
 }
-
-// https://dummyjson.com/products?limit=100&skip=0&select=category,thumbnail

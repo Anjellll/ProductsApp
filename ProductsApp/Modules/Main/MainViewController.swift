@@ -50,7 +50,7 @@ class MainViewController: UIViewController {
         search.searchTextField.backgroundColor = .white
         search.layer.cornerRadius = 10.0
         search.layer.borderWidth = 1
-        search.layer.borderColor = UIColor.systemGray4.cgColor
+        search.layer.borderColor = UIColor.gray.cgColor
         search.clipsToBounds = true
         return search
     }()
