@@ -12,24 +12,32 @@ import Kingfisher
 class MainViewController: UIViewController {
 
     var mainPresenter: MainPresenterDelegate?
-    
+   
     private var productsCategoryData = [
-        ProductsCategoryModels(categoryImage: "product1", categoryName: "Product1"),
-        ProductsCategoryModels(categoryImage: "product2", categoryName: "Product2"),
-        ProductsCategoryModels(categoryImage: "product3", categoryName: "Product3"),
-        ProductsCategoryModels(categoryImage: "product1", categoryName: "Product4"),
-        ProductsCategoryModels(categoryImage: "product2", categoryName: "Product5"),
-        ProductsCategoryModels(categoryImage: "product3", categoryName: "Product6")
+        ProductsCategoryModels(categoryImage: "smartphones", categoryName: "smartphones"),
+        ProductsCategoryModels(categoryImage: "laptops", categoryName: "laptops"),
+        ProductsCategoryModels(categoryImage: "fragrances", categoryName: "fragrances"),
+        ProductsCategoryModels(categoryImage: "skincare", categoryName: "skincare"),
+        ProductsCategoryModels(categoryImage: "groceries", categoryName: "groceries"),
+        ProductsCategoryModels(categoryImage: "home-decoration", categoryName: "home-decoration"),
+        ProductsCategoryModels(categoryImage: "furniture", categoryName: "furniture"),
+        ProductsCategoryModels(categoryImage: "tops", categoryName: "tops"),
+        ProductsCategoryModels(categoryImage: "womens-dresses", categoryName: "womens-dresses"),
+        ProductsCategoryModels(categoryImage: "womens-shoes", categoryName: "womens-shoes"),
+        ProductsCategoryModels(categoryImage: "mens-shirts", categoryName: "mens-shirts"),
+        ProductsCategoryModels(categoryImage: "mens-shoes", categoryName: "mens-shoes"),
+        ProductsCategoryModels(categoryImage: "mens-watches", categoryName: "mens-watches"),
+        ProductsCategoryModels(categoryImage: "womens-watches", categoryName: "womens-watches"),
+        ProductsCategoryModels(categoryImage: "womens-bags", categoryName: "womens-bags"),
+        ProductsCategoryModels(categoryImage: "womens-jewellery", categoryName: "womens-jewellery"),
+        ProductsCategoryModels(categoryImage: "sunglasses", categoryName: "sunglasses"),
+        ProductsCategoryModels(categoryImage: "automotive", categoryName: "automotive"),
+        ProductsCategoryModels(categoryImage: "motorcycle", categoryName: "motorcycle"),
+        ProductsCategoryModels(categoryImage: "lighting", categoryName: "lighting")
     ]
     
-    private var productData = [
-        ProductModel(title: "IPhoneX", description: nil, price: 1000, brand: "Apple", discountPercentage: 12.5, rating: 4.6, thumbnail: "phone1"),
-        ProductModel(title: "MacBook", description: nil, price: 2000, brand: "Apple", discountPercentage: 12.2, rating: 4.4, thumbnail: "macbook"),
-        ProductModel(title: "Airpods Pro", description: nil, price: 1200, brand: "Apple", discountPercentage: 32.2, rating: 3.6, thumbnail: "airpods"),
-        ProductModel(title: "IPhoneX", description: nil, price: 1000, brand: "Apple", discountPercentage: 12.5, rating: 4.6, thumbnail: "phone1"),
-        ProductModel(title: "MacBook", description: nil, price: 2000, brand: "Apple", discountPercentage: 12.2, rating: 4.4, thumbnail: "macbook"),
-        ProductModel(title: "Airpods Pro", description: nil, price: 1200, brand: "Apple", discountPercentage: 32.2, rating: 3.6, thumbnail: "airpods"),
-    ]
+    private var categoryProductData = [Product]()
+    private var allProductsData = [Product]()
     
     private let searchBar: UISearchBar = {
         let search = UISearchBar()
@@ -71,6 +79,7 @@ class MainViewController: UIViewController {
     override func loadView() {
         super.loadView()
         setupUI()
+        getProducts()
     }
 }
 
@@ -110,8 +119,6 @@ extension MainViewController {
             make.width.equalTo(400)
             make.leading.trailing.bottom.equalToSuperview()
         }
-        
-        
     }
     
     private func configureCollectionViews() {
@@ -123,6 +130,10 @@ extension MainViewController {
         productsCollectionView.dataSource = self
         productsCollectionView.delegate = self
     }
+    
+    private func getProducts() {
+        mainPresenter?.getAllProducts()
+    }
 }
 
 extension MainViewController: UICollectionViewDataSource {
@@ -130,7 +141,7 @@ extension MainViewController: UICollectionViewDataSource {
         if collectionView == categoryCollectionView {
             return productsCategoryData.count
         } else if collectionView == productsCollectionView {
-            return productData.count
+            return allProductsData.count
         }
         return 0
     }
@@ -145,20 +156,38 @@ extension MainViewController: UICollectionViewDataSource {
             cell.displayInfo(product: categoryProduct)
             return cell
         } else if collectionView == productsCollectionView {
-            // Создайте ячейку для второй коллекции и настройте ее
-            // Пример:
+            
             guard let cell = productsCollectionView.dequeueReusableCell(
                 withReuseIdentifier: ProductCollectionViewCell.reuseIdentifier,
                 for: indexPath) as? ProductCollectionViewCell else { fatalError() }
             
-            let product = productData[indexPath.row]
+            let product = allProductsData[indexPath.row]
             cell.displayInfo(product: product)
             return cell
         }
         
-        // Этот код никогда не должен достигнуться
         fatalError("Unexpected collection view")
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == categoryCollectionView {
+            let selectedCategory = productsCategoryData[indexPath.item].categoryName
+            filterProductsByCategory(selectedCategory)
+        }
+    }
+
+    private func filterProductsByCategory(_ category: String?) {
+        guard let category = category else { return }
+
+        print("Selected category: \(category)")
+        allProductsData = category.isEmpty ? categoryProductData : categoryProductData.filter { $0.category == category }
+
+        print("Filtered products count: \(allProductsData.count)")
+
+        self.productsCollectionView.reloadData()
+    }
+
+
 }
 
 extension MainViewController: UICollectionViewDelegateFlowLayout {
@@ -166,12 +195,10 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
         if collectionView == categoryCollectionView {
             return CGSize(width: collectionView.frame.width / 4, height: collectionView.frame.height)
         } else if collectionView == productsCollectionView {
-            // Верните размеры для ячейки второй коллекции
-            // Пример:
+    
             return CGSize(width: collectionView.frame.width, height: 260) // or change height to 230
         }
         
-        // Этот код никогда не должен достигнуться
         return CGSize.zero
     }
     
@@ -179,12 +206,10 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
         if collectionView == categoryCollectionView {
             return UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
         } else if collectionView == productsCollectionView {
-            // Верните отступы для второй коллекции
-            // Пример:
+        
             return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         }
         
-        // Этот код никогда не должен достигнуться
         return UIEdgeInsets.zero
     }
     
@@ -192,18 +217,28 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
         if collectionView == categoryCollectionView {
             return 8
         } else if collectionView == productsCollectionView {
-            // Верните минимальный интервал между строками для второй коллекции
-            // Пример:
+            
             return 8
         }
         
-        // Этот код никогда не должен достигнуться
         return 0
     }
 }
 
 extension MainViewController: MainControllerDelegate {
+    func updateView(with products: [Product]) {
+        self.allProductsData = products
+        self.categoryProductData = products
+
+        DispatchQueue.main.async {
+            self.productsCollectionView.reloadData()
+            self.categoryCollectionView.reloadData()
+        }
+    }
     
+    func showError(message: String) {
+        print("Error: \(message)")
+    }
 }
 
 
@@ -212,6 +247,18 @@ extension MainViewController: UISearchBarDelegate {
         _ searchBar: UISearchBar,
         textDidChange searchText: String
     ) {
-        
+        // Фильтрация категорий
+        let filteredCategories = productsCategoryData.filter { $0.categoryName?.lowercased().contains(searchText.lowercased()) ?? false }
+
+        // Если есть выбранная категория
+        if let selectedCategory = filteredCategories.first?.categoryName {
+            // Фильтрация продуктов в выбранной категории
+            allProductsData = categoryProductData.filter { $0.category == selectedCategory && ($0.title?.lowercased().contains(searchText.lowercased()) ?? false) }
+        } else {
+            // Если нет выбранной категории, отобразите все продукты
+            allProductsData = categoryProductData.filter { $0.title?.lowercased().contains(searchText.lowercased()) ?? false }
+        }
+
+        self.productsCollectionView.reloadData()
     }
 }

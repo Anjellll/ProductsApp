@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		212D3A432B15EEF1001C6474 /* DummyNetworkLayerNetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212D3A422B15EEF1001C6474 /* DummyNetworkLayerNetworkLayer.swift */; };
+		212D3A462B15F4DA001C6474 /* AllProductsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212D3A452B15F4DA001C6474 /* AllProductsModel.swift */; };
+		212D3A482B15F625001C6474 /* DeleteProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212D3A472B15F625001C6474 /* DeleteProduct.swift */; };
 		213647532B07F78F0002940E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213647522B07F78F0002940E /* AppDelegate.swift */; };
 		213647552B07F78F0002940E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213647542B07F78F0002940E /* SceneDelegate.swift */; };
 		213647572B07F78F0002940E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213647562B07F78F0002940E /* ViewController.swift */; };
@@ -45,6 +48,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		212D3A422B15EEF1001C6474 /* DummyNetworkLayerNetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyNetworkLayerNetworkLayer.swift; sourceTree = "<group>"; };
+		212D3A452B15F4DA001C6474 /* AllProductsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllProductsModel.swift; sourceTree = "<group>"; };
+		212D3A472B15F625001C6474 /* DeleteProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteProduct.swift; sourceTree = "<group>"; };
 		2136474F2B07F78F0002940E /* ProductsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		213647522B07F78F0002940E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		213647542B07F78F0002940E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +104,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		212D3A442B15F490001C6474 /* NetworkDummyModels */ = {
+			isa = PBXGroup;
+			children = (
+				212D3A452B15F4DA001C6474 /* AllProductsModel.swift */,
+				212D3A472B15F625001C6474 /* DeleteProduct.swift */,
+			);
+			path = NetworkDummyModels;
+			sourceTree = "<group>";
+		};
 		213647462B07F78F0002940E = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +200,7 @@
 		213647702B0A25170002940E /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				212D3A422B15EEF1001C6474 /* DummyNetworkLayerNetworkLayer.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -208,6 +224,7 @@
 		213647752B0A26640002940E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				212D3A442B15F490001C6474 /* NetworkDummyModels */,
 				21DE77392B0B9E530087BB05 /* ProductsCategoryModels.swift */,
 				21DE773B2B0BA1EA0087BB05 /* ProductModel.swift */,
 			);
@@ -450,6 +467,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21DE772B2B0A95A10087BB05 /* ProfilePresenter.swift in Sources */,
+				212D3A462B15F4DA001C6474 /* AllProductsModel.swift in Sources */,
 				21DE77272B0A957C0087BB05 /* FavoriteConfigurator.swift in Sources */,
 				21DE77432B0BA8090087BB05 /* ProductCollectionViewCell.swift in Sources */,
 				213647682B08F3EF0002940E /* AppCoordinator.swift in Sources */,
@@ -465,6 +483,7 @@
 				21DE77102B0A93BE0087BB05 /* MainViewController.swift in Sources */,
 				21DE77362B0A963D0087BB05 /* ProductDetailsPresenter.swift in Sources */,
 				213647742B0A257D0002940E /* DecodeHelper.swift in Sources */,
+				212D3A482B15F625001C6474 /* DeleteProduct.swift in Sources */,
 				21DE77252B0A95680087BB05 /* FavoritePresenter.swift in Sources */,
 				21DE77142B0A940D0087BB05 /* MainPresenter.swift in Sources */,
 				21DE77402B0BA7E40087BB05 /* CategoryCollectionViewCell.swift in Sources */,
@@ -476,6 +495,7 @@
 				21DE77202B0A94CD0087BB05 /* FavoriteViewController.swift in Sources */,
 				21DE771A2B0A949B0087BB05 /* CartProtocols.swift in Sources */,
 				21DE77122B0A93F00087BB05 /* MainProtocols.swift in Sources */,
+				212D3A432B15EEF1001C6474 /* DummyNetworkLayerNetworkLayer.swift in Sources */,
 				21DE77292B0A95950087BB05 /* ProfileViewController.swift in Sources */,
 				21DE771E2B0A94B90087BB05 /* CartConfigurator.swift in Sources */,
 				21DE77382B0A96490087BB05 /* ProductDetailsConfigurator.swift in Sources */,

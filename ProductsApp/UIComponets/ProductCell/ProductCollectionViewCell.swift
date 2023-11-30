@@ -18,6 +18,7 @@ class ProductCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
         productImage.layer.shadowOffset = .init(width: 15, height: 10)
         productImage.layer.shadowOpacity = 0.4
         productImage.layer.shadowColor = UIColor.gray.cgColor
+        productImage.layer.cornerRadius = 194 / 18
         return productImage
     }()
     
@@ -180,14 +181,14 @@ extension ProductCollectionViewCell {
         }
     }
     
-    func displayInfo(product: ProductModel) {
+    func displayInfo(product: Product) {
         productLabel.text = product.title
         if let price = product.price {
             productPrice.text = String("•  \(price)$")
         } else {
             productPrice.text = "N/A"
         }
-    
+        
         if let brand = product.brand {
             productBrand.text = String("•  \(brand)")
         }
@@ -203,7 +204,12 @@ extension ProductCollectionViewCell {
         } else {
             productDiscount.text = "N/A"
         }
-        // images
-        productImage.image = UIImage(named: product.thumbnail ?? "placeholderImage")
+        
+        if let thumbnailURLString = product.thumbnail,
+           let thumbnailURL = URL(string: thumbnailURLString) {
+            productImage.kf.setImage(with: thumbnailURL, placeholder: UIImage(named: "placeholderImage"))
+        } else {
+            productImage.image = UIImage(named: "placeholderImage")
+        }
     }
 }

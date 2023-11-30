@@ -10,12 +10,12 @@ import UIKit
 class MainModuleConfigurator {
     static func build() -> UIViewController {
         let vc = MainViewController()
-//        let service = NetworkLayer()
+        let service = DummyNetworkLayer()
         let presenter = MainPresenter()
         
         vc.mainPresenter = presenter
         
-//        presenter.networkLayerDelegate = service
+        presenter.networkManager = service
         presenter.view = vc
         
         return vc

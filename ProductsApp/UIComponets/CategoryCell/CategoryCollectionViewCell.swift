@@ -13,7 +13,7 @@ class CategoryCollectionViewCell: UICollectionViewCell, ReuseIdentifying {
     private lazy var categoryImage: UIImageView! = {
         var productImage = UIImageView()
         productImage.contentMode = .scaleAspectFill
-        productImage.layer.cornerRadius = 80 / 4
+        productImage.layer.cornerRadius = 80 / 2
         productImage.clipsToBounds = true
         productImage.layer.shadowOffset = .init(width: 15, height: 10)
         productImage.layer.shadowOpacity = 0.4
@@ -76,10 +76,10 @@ extension CategoryCollectionViewCell {
             // Устанавливаем изображение с использованием имени ресурса
             categoryImage.image = UIImage(named: imageName)
         } else {
-            // Если имя изображения отсутствует, устанавливаем заглушку или другое значение по умолчанию
+            // Если URL изображения отсутствует, установите запасное изображение
             categoryImage.image = UIImage(named: "placeholderImage")
         }
-        
-        categoryImage.image = UIImage(named: product.categoryImage ?? "placeholderImage")
     }
 }
+
+// https://dummyjson.com/products?limit=100&skip=0&select=category,thumbnail
